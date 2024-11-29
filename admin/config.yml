@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway # Use 'git-gateway' for Netlify or 'github' for GitHub.
+  branch: main # Specify the branch for commits.
+
+media_folder: "public/images/uploads" # Where media files are stored.
+public_folder: "/images/uploads" # Public URL for media files.
+
+collections:
+  - name: "blogs"
+    label: "Blogs"
+    folder: "content/blogs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
