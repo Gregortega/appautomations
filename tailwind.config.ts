@@ -51,6 +51,16 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+  		animation: {
+  			'marquee': 'marquee 25s linear infinite',
+  			'marquee-pause': 'marquee 25s linear infinite paused',
+  		},
+  		keyframes: {
+  			marquee: {
+  				'0%': { transform: 'translateX(0)' },
+  				'100%': { transform: 'translateX(-50%)' },
+  			},
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -58,5 +68,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

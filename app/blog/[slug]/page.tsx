@@ -3,6 +3,8 @@ export const runtime = "nodejs" // Ensure Node.js runtime for fs operations
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { marked } from 'marked'
+import { Layout } from "@/components/shared/layout"
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), "content/blogs")
@@ -13,49 +15,36 @@ export async function generateStaticParams() {
   }))
 }
 
-export default async function BlogPost(props: any) {
-  const { slug } = props.params
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const { title, date, content } = getBlogPost(params.slug)
   
-  if (!slug) {
-    throw new Error("Slug is required to load the blog post.")
-  }
-
-  const blog = await getBlog(slug)
-
-  if (!blog) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <h1 className="text-3xl font-bold">Blog Not Found</h1>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen bg-white py-10 px-5">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">{blog.title}</h1>
-        <p className="text-gray-600 mb-4">{blog.date}</p>
-        <div
-          className="prose prose-lg"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-        ></div>
+    <Layout>
+      <article className="container mx-auto px-4 md:px-6 py-8 prose prose-pink lg:prose-xl">
+        <h1>{title}</h1>
+        <time className="text-gray-500" dateTime={date}>
+          {new Date(date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+        <div dangerouslySetInnerHTML={{ __html: marked(content) }} />
       </article>
-    </div>
+    </Layout>
   )
 }
 
-async function getBlog(slug: string) {
-  try {
-    const filePath = path.join(process.cwd(), "content/blogs", `${slug}.md`)
-    const fileContent = fs.readFileSync(filePath, "utf-8")
-    const { data, content } = matter(fileContent)
+function getBlogPost(slug: string) {
+  const markdownFile = fs.readFileSync(
+    path.join(process.cwd(), "content", "blogs", `${slug}.md`),
+    "utf-8"
+  )
 
-    return {
-      title: data.title || "Untitled Blog",
-      date: data.date || "Unknown Date",
-      content
-    }
-  } catch (error) {
-    return null // Handle cases where the file doesn't exist
+  const { data: frontmatter, content } = matter(markdownFile)
+  return {
+    title: frontmatter.title,
+    date: frontmatter.date,
+    content,
   }
 }
