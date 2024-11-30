@@ -7,16 +7,15 @@ import { marked } from 'marked'
 import { Layout } from "@/components/shared/layout"
 
 export async function generateStaticParams() {
-  const blogDir = path.join(process.cwd(), "content/blogs")
-  const filenames = fs.readdirSync(blogDir)
-
-  return filenames.map((filename) => ({
-    slug: filename.replace(".md", "") // Remove .md extension
+  const blogsDirectory = path.join(process.cwd(), "content", "blogs")
+  const files = fs.readdirSync(blogsDirectory)
+  return files.map((filename) => ({
+    slug: filename.replace(".md", ""),
   }))
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const { title, date, content } = getBlogPost(params.slug)
+export default async function BlogPost({ params }: { params: any }) {
+  const { title, date, content } = await getBlogPost(params.slug)
   
   return (
     <Layout>
@@ -35,7 +34,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   )
 }
 
-function getBlogPost(slug: string) {
+async function getBlogPost(slug: string) {
   const markdownFile = fs.readFileSync(
     path.join(process.cwd(), "content", "blogs", `${slug}.md`),
     "utf-8"
