@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You're Invited!</title>
+  </head>
+  <body>
+    <h1>Welcome to {{ .SiteName }}</h1>
+    <p>
+      You've been invited to join the CMS for {{ .SiteName }}. Click the link
+      below to accept the invitation and set up your account:
+    </p>
+    <p>
+      <a href="{{ .SiteURL }}/admin/#invite_token={{ .Token }}"
+        >Accept Invitation</a
+      >
+    </p>
+    <p>If you didn't request this, you can ignore this email.</p>
+  </body>
+</html>
