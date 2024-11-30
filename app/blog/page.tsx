@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card"
-import { Workflow, ArrowRight, Calendar, User } from "lucide-react"
+import { Workflow, ArrowRight } from "lucide-react"
 
 export default function BlogPage() {
   const blogs = getBlogs()
@@ -67,13 +67,14 @@ export default function BlogPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <div className="flex items-center text-sm text-gray-500 space-x-4"></div>
               </CardContent>
               <CardFooter className="mt-auto">
-                <Button variant="outline" className="w-full">
-                  Read More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Link href={`/blog/${post.slug}`}>
+                  <Button variant="outline" className="w-full">
+                    Read More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
