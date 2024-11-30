@@ -66,7 +66,7 @@ export default function BlogPage() {
                 <CardTitle>{post.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">{"exceprt"}</p>
+                <p className="text-gray-600 mb-4">{post.excerpt}</p>
                 <div className="flex items-center text-sm text-gray-500 space-x-4"></div>
               </CardContent>
               <CardFooter className="mt-auto">
