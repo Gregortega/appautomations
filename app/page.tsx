@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Bot, Mail, FileText, FileSpreadsheet, Workflow, Zap, ArrowRight, Plus, Minus } from 'lucide-react'
+import { Bot, Mail, FileText, FileSpreadsheet, Workflow, Zap, ArrowRight, Plus, Minus, Menu, X } from 'lucide-react'
 import Link from "next/link"
 import { useState } from "react"
 
@@ -71,6 +71,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function LandingPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   useEffect(() => {
     // Initialize Netlify Identity
     netlifyIdentity.init()
@@ -106,25 +107,96 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="px-4 lg:px-6 h-16 flex items-center">
-        <Link className="flex items-center justify-center" href="/">
-          <Workflow className="h-6 w-6 text-pink-500" />
-          <span className="ml-2 text-xl font-bold">appautomations.com.au</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            Services
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            About
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/blog">
-            Blog
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            Contact
-          </Link>
-        </nav>
+      <header className="sticky top-0 w-full bg-white border-b z-50">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
+              <Link className="flex items-center" href="/">
+                <Workflow className="h-6 w-6 text-pink-500 flex-shrink-0" />
+                <span className="ml-2 text-xl font-bold">
+                  appautomations.com.au
+                </span>
+              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden sm:flex items-center space-x-8">
+              <Link 
+                className="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors" 
+                href="#"
+              >
+                Services
+              </Link>
+              <Link 
+                className="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors" 
+                href="#"
+              >
+                About
+              </Link>
+              <Link 
+                className="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors" 
+                href="/blog"
+              >
+                Blog
+              </Link>
+              <Link 
+                className="text-sm font-medium text-gray-700 hover:text-pink-500 transition-colors" 
+                href="#"
+              >
+                Contact
+              </Link>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="sm:hidden"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="sm:hidden border-t bg-white">
+            <nav className="flex flex-col divide-y divide-gray-100">
+              <Link
+                className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+                href="#"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <Link
+                className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+                href="#"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+                href="/blog"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-pink-500"
+                href="#"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
