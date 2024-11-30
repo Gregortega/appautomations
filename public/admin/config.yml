@@ -7,9 +7,9 @@ media_folder: "images/uploads" # Media files saved relative to /public
 public_folder: "/images/uploads" # Public URL for media files
 
 collections:
-  - name: "blogs"
-    label: "Blogs"
-    folder: "content/blogs" # Path in your Git repo for storing blog posts
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog" # Path in your Git repo for storing blog posts
     create: true
     slug: "{{slug}}"
     fields:
