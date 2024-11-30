@@ -125,7 +125,8 @@ function getBlogs() {
       slug: filename.replace(".md", ""),
       title: data.title || "Untitled Blog",
       description: data.description || "",
-      image: data.image || null // Add an image field in your markdown
+      image: data.image || null, // Add an image field in your markdown
+      excerpt: data.excerpt || ""
     }
   })
 }
