@@ -14,10 +14,6 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
-      - {
-          label: "Images",
-          name: "images",
-          widget: "list",
-          field: { label: "Image", name: "image", widget: "image" }
-        }

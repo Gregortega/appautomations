@@ -61,22 +61,13 @@ export default function BlogPage() {
         </p>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {blogs.map((post) => (
-            <Card key={post.id} className="flex flex-col">
+            <Card key={post.slug} className="flex flex-col">
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <div className="flex items-center text-sm text-gray-500 space-x-4">
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    <span>{post.date}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <User className="h-4 w-4 mr-1" />
-                    <span>{post.author}</span>
-                  </div>
-                </div>
+                <p className="text-gray-600 mb-4">{"exceprt"}</p>
+                <div className="flex items-center text-sm text-gray-500 space-x-4"></div>
               </CardContent>
               <CardFooter className="mt-auto">
                 <Button variant="outline" className="w-full">
