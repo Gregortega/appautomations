@@ -1,6 +1,6 @@
 backend:
-  name: git-away # Or 'github' if using GitHub
-  branch: main # Git branch to commit changes
+  name: git-gateway # Or 'github' if using GitHub
+  branch: production # Git branch to commit changes
   auth_scope: repo
 
 media_folder: "images/uploads" # Media files saved relative to /public
